@@ -1,11 +1,11 @@
 import React from 'react';
 import useSWR from 'swr';
 import MovieCard from '../components/movie/MovieCard';
-import { fetcher } from '../config';
+import { apiKey, fetcher } from '../config';
 
 const MoviePage = () => {
 
-    const { data } = useSWR(`https://api.themoviedb.org/3/movie/popular?api_key=8383b5d0630bcdbd9b5c583f69bd3353&language=en-US&page=1`, fetcher);
+    const { data } = useSWR(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`, fetcher);
     const movies = data?.results || [];
 
     return (
@@ -24,7 +24,7 @@ const MoviePage = () => {
 
             <div className="grid grid-cols-4 gap-10">
                 {movies.length > 0 && movies.map(item => (
-                    <MovieCard item={item}></MovieCard>
+                    <MovieCard item={item} key={item.id}></MovieCard>
                 ))}
             </div>
         </div>
